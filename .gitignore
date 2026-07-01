@@ -4,3 +4,4 @@ dist/
 connections.json
 coverage/
 .vscode/settings.json
+connections.local.yaml

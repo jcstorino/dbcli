@@ -1,0 +1,10 @@
+connections:
+  - name: protheus
+    provider: sqlserver
+    server: localhost
+    port: 1433
+    database: PROTHEUS
+    username: -usuario-
+    password: -senha-
+    encrypt: false
+    trustServerCertificate: true
