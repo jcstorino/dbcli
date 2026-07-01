@@ -38,14 +38,16 @@ connections:
     provider: sqlserver
     server: localhost
     port: 1433
-    database: PROTHEUS12
-    username: sa
-    password: abc123!@#
+    database: PROTHEUS
+    username: -usuario-
+    password: -senha-
     encrypt: false
     trustServerCertificate: true
 ```
 
 Use sempre o `name` da conexão nos comandos.
+Use `connections.local.example.yaml` como referência.
+Não versione `connections.local.yaml`.
 
 ## Fluxo recomendado para agentes
 
