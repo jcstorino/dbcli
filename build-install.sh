@@ -31,6 +31,7 @@ description: "Acessar dados via DBCLI para testar conexao, listar tabelas, descr
 # DBCLI Data Access
 
 Use este skill para acesso operacional a banco via DBCLI.
+O executável obrigatório é \`dbcli\`; não use o comando genérico \`db\`.
 
 ## Escopo
 
@@ -51,12 +52,12 @@ Use este skill para acesso operacional a banco via DBCLI.
 
 1. Leia [references/dbcli-readme.md](references/dbcli-readme.md).
 2. Confirme prerequisitos do projeto DBCLI.
-3. Antes do primeiro uso, rode \`db test <connection>\`.
+3. Antes do primeiro uso, rode \`dbcli test <connection>\`.
 4. Se precisar descobrir estrutura:
-   - \`db tables\`
-   - \`db describe\`
-   - \`db protheus\`
-5. Para leitura de dados, prefira \`db query\` em modo padrao seguro.
+   - \`dbcli tables\`
+   - \`dbcli describe\`
+   - \`dbcli protheus\`
+5. Para leitura de dados, prefira \`dbcli query\` em modo padrao seguro.
 6. Use \`--format json\` quando a saida for alimentar outro processo.
 7. Use \`--allow-write\` somente com instrucao explicita do usuario.
 
@@ -67,7 +68,7 @@ Use este skill para acesso operacional a banco via DBCLI.
 - Nao versione \`connections.local.yaml\`.
 - Sempre testar conexao antes do primeiro comando real.
 - Para Protheus, diferencie alias logico de tabela fisica.
-- Antes de montar SQL Protheus, prefira \`db protheus\` e depois \`db describe\`.
+- Antes de montar SQL Protheus, prefira \`dbcli protheus\` e depois \`dbcli describe\`.
 EOF
 
 cat > "$REFERENCE_FILE" <<EOF

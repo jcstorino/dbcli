@@ -26,9 +26,9 @@ export class ErrorFormatter {
                     `Objeto não encontrado: ${objectName}`,
                     'Verifique o nome físico da tabela e o schema.',
                     'Para Protheus, consulte primeiro:',
-                    '- db protheus <conexao> <alias>',
-                    '- db tables <conexao>',
-                    '- db describe <conexao> <tabela_fisica>',
+                    '- dbcli protheus <conexao> <alias>',
+                    '- dbcli tables <conexao>',
+                    '- dbcli describe <conexao> <tabela_fisica>',
                 ].join('\n');
             }
         }

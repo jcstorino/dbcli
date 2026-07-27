@@ -29,7 +29,7 @@ const parseFormat = (value: string): OutputFormat => {
 };
 
 program
-    .name('db')
+    .name('dbcli')
     .description('Database CLI')
     .version('0.1.0');
 

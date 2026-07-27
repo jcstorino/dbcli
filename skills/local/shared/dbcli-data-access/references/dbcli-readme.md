@@ -65,11 +65,11 @@ Não versione `connections.local.yaml`.
 
 Ao precisar trabalhar com banco:
 
-1. validar a conexão com `db test`
-2. descobrir tabelas com `db tables` se necessário
-3. inspecionar colunas com `db describe`
-4. executar consultas com `db query`
-5. quando for Protheus, usar `db protheus` para ler SX2/SX3
+1. validar a conexão com `dbcli test`
+2. descobrir tabelas com `dbcli tables` se necessário
+3. inspecionar colunas com `dbcli describe`
+4. executar consultas com `dbcli query`
+5. quando for Protheus, usar `dbcli protheus` para ler SX2/SX3
 
 ## Segurança
 
@@ -90,7 +90,7 @@ Por padrão ele bloqueia:
 Para liberar escrita, use:
 
 ```bash
-db query <connection> "<sql>" --allow-write
+dbcli query <connection> "<sql>" --allow-write
 ```
 
 Use `--allow-write` somente com instrução explícita.
@@ -100,13 +100,13 @@ Use `--allow-write` somente com instrução explícita.
 ### Testar conexão
 
 ```bash
-db test <connection>
+dbcli test <connection>
 ```
 
 Exemplo:
 
 ```bash
-db test protheus
+dbcli test protheus
 ```
 
 Retorno esperado:
@@ -116,51 +116,51 @@ Retorno esperado:
 ### Executar query inline
 
 ```bash
-db query <connection> "<sql>"
+dbcli query <connection> "<sql>"
 ```
 
 Exemplo:
 
 ```bash
-db query protheus "select top 10 * from sa1990"
+dbcli query protheus "select top 10 * from sa1990"
 ```
 
 ### Executar query por arquivo
 
 ```bash
-db query <connection> --file <arquivo.sql>
+dbcli query <connection> --file <arquivo.sql>
 ```
 
 Exemplo:
 
 ```bash
-db query protheus --file ./scripts/clientes.sql
+dbcli query protheus --file ./scripts/clientes.sql
 ```
 
 ### Listar tabelas
 
 ```bash
-db tables <connection>
-db tables <connection> --schema <schema>
+dbcli tables <connection>
+dbcli tables <connection> --schema <schema>
 ```
 
 Exemplo:
 
 ```bash
-db tables protheus --schema dbo
+dbcli tables protheus --schema dbo
 ```
 
 ### Descrever tabela física
 
 ```bash
-db describe <connection> <tabela>
+dbcli describe <connection> <tabela>
 ```
 
 Exemplos:
 
 ```bash
-db describe protheus SA1990
-db describe protheus dbo.SA1990
+dbcli describe protheus SA1990
+dbcli describe protheus dbo.SA1990
 ```
 
 ### Ler metadados Protheus
@@ -168,13 +168,13 @@ db describe protheus dbo.SA1990
 Consulta SX2 e SX3.
 
 ```bash
-db protheus <connection> <alias>
+dbcli protheus <connection> <alias>
 ```
 
 Exemplo:
 
 ```bash
-db protheus protheus SA1
+dbcli protheus protheus SA1
 ```
 
 Retorna:
@@ -208,7 +208,7 @@ table
 Exemplo:
 
 ```bash
-db query protheus "select top 5 name from sys.tables" --format json
+dbcli query protheus "select top 5 name from sys.tables" --format json
 ```
 
 ## Exportar resultado
@@ -222,7 +222,7 @@ Para gravar em arquivo:
 Exemplo:
 
 ```bash
-db query protheus "select top 5 * from sa1990" --format json --out ./tmp/clientes.json
+dbcli query protheus "select top 5 * from sa1990" --format json --out ./tmp/clientes.json
 ```
 
 ## Limitar linhas exibidas
@@ -236,7 +236,7 @@ Para limitar a saída:
 Exemplo:
 
 ```bash
-db tables protheus --max-rows 20
+dbcli tables protheus --max-rows 20
 ```
 
 Observação:
@@ -255,8 +255,8 @@ Se quiser limitar o banco, faça isso na própria query.
 - para Protheus, diferenciar:
   - alias lógico: `SA1`
   - tabela física no banco: `SA1990`, `SA1010` ou outra variação do ambiente
-- usar `db protheus` para entender os campos antes de montar SQL
-- usar `db describe` para validar a estrutura física real
+- usar `dbcli protheus` para entender os campos antes de montar SQL
+- usar `dbcli describe` para validar a estrutura física real
 - usar `--format json` quando a saída for consumida por outro processo
 
 ## Fluxo recomendado para Protheus
@@ -264,16 +264,16 @@ Se quiser limitar o banco, faça isso na própria query.
 Quando o objetivo envolver fontes, campos, queries ou revisão técnica:
 
 1. identificar o alias lógico do Protheus
-2. executar `db protheus <conexao> <alias>`
-3. validar a tabela física com `db tables` ou `db describe`
+2. executar `dbcli protheus <conexao> <alias>`
+3. validar a tabela física com `dbcli tables` ou `dbcli describe`
 4. só então montar a query final
 
 Exemplo:
 
 ```bash
-db protheus protheus SA1
-db describe protheus SA1990
-db query protheus "select top 20 a1_cod, a1_loja, a1_nome from sa1990"
+dbcli protheus protheus SA1
+dbcli describe protheus SA1990
+dbcli query protheus "select top 20 a1_cod, a1_loja, a1_nome from sa1990"
 ```
 
 ## Limitações atuais

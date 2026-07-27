@@ -15,7 +15,7 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "db": "./dist/index.js"
+    "dbcli": "./dist/index.js"
   },
   "scripts": {
     "dev": "tsx src/index.ts",
