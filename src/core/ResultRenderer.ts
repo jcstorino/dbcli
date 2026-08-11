@@ -1,4 +1,9 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { Readable, Transform } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 
 import Table from 'cli-table3';
 
@@ -24,6 +29,76 @@ export class ResultRenderer {
         }
 
         console.log(output);
+    }
+
+    /**
+     * Streaming counterpart of render() for the CSV+file case: rows flow
+     * one at a time from the DB through a CSV-formatting Transform straight
+     * into the output file, so memory usage stays O(1) instead of O(table
+     * size) regardless of how large the export is.
+     */
+    public static async renderCsvToFile(
+        rowStream: Readable,
+        outPath: string
+    ): Promise<number> {
+        let columns: string[] | null = null;
+        let rowCount = 0;
+
+        const csvTransform = new Transform({
+            writableObjectMode: true,
+            transform(row: Record<string, unknown>, _encoding, callback) {
+                const lines: string[] = [];
+
+                if (!columns) {
+                    columns = ResultRenderer.getColumns([row]);
+                    lines.push(
+                        columns.map((column) => ResultRenderer.escapeCsv(column)).join(',')
+                    );
+                }
+
+                lines.push(
+                    columns
+                        .map((column) =>
+                            ResultRenderer.escapeCsv(ResultRenderer.formatCell(row[column]))
+                        )
+                        .join(',')
+                );
+
+                rowCount += 1;
+                callback(null, `${lines.join('\n')}\n`);
+            },
+        });
+
+        // Writing straight to `outPath` couples the DB read speed to the
+        // destination disk's write speed: whenever the destination stalls
+        // (e.g. a cloud-synced folder like iCloud Drive/OneDrive throttling
+        // large files), backpressure pauses the SQL stream, and if it stays
+        // paused too long the DB connection gets dropped as idle
+        // (`read ETIMEDOUT`). Writing to a local temp file first — always
+        // fast, never cloud-synced — keeps the SQL stream flowing, then a
+        // single OS-level copy lands the finished file at `outPath`.
+        const tempPath = path.join(
+            os.tmpdir(),
+            `dbcli-${crypto.randomUUID()}-${path.basename(outPath)}`
+        );
+
+        try {
+            await pipeline(rowStream, csvTransform, fs.createWriteStream(tempPath, { encoding: 'utf8' }));
+
+            try {
+                fs.renameSync(tempPath, outPath);
+            } catch {
+                // Cross-device (EXDEV): temp dir and destination are on
+                // different filesystems, so fall back to copy + delete.
+                fs.copyFileSync(tempPath, outPath);
+                fs.unlinkSync(tempPath);
+            }
+        } catch (err) {
+            fs.rmSync(tempPath, { force: true });
+            throw err;
+        }
+
+        return rowCount;
     }
 
     private static serialize(

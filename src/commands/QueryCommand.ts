@@ -21,6 +21,19 @@ export class QueryCommand {
         const service = DatabaseService.create(connectionName);
         const sqlText = this.resolveSql(sql, options.file);
         SqlSafetyGuard.assertSafe(sqlText, options.allowWrite);
+
+        // CSV exports to a file skip the buffered path entirely: large
+        // tables used to be fully materialized in memory (recordset + CSV
+        // lines + joined string) before being written, which could exhaust
+        // the heap. maxRows still uses the buffered path since it's meant
+        // for quick previews, not full-table exports.
+        if (options.format === 'csv' && options.out && !options.maxRows) {
+            const rowStream = await service.executeQueryStream(sqlText);
+            const rowCount = await ResultRenderer.renderCsvToFile(rowStream, options.out);
+            console.log(`${options.out} (${rowCount} linhas)`);
+            return;
+        }
+
         const result = await service.executeQuery(sqlText);
 
         ResultRenderer.render(result, {

@@ -1,3 +1,5 @@
+import { Readable } from 'node:stream';
+
 import { ConfigLoader } from '../config/ConfigLoader.js';
 import { ProviderRegistry } from '../providers/ProviderRegistry.js';
 import { DatabaseProvider } from '../providers/DatabaseProvider.js';
@@ -30,6 +32,32 @@ export class DatabaseService {
 
     public async executeQuery(sql: string): Promise<QueryResult> {
         return this.withConnection(async () => this.provider.execute(sql));
+    }
+
+    /**
+     * Like executeQuery, but yields rows one at a time instead of buffering
+     * the whole result set. The connection is kept open for as long as the
+     * returned stream is being consumed and is closed once it ends/errors.
+     */
+    public async executeQueryStream(sql: string): Promise<Readable> {
+        await this.provider.connect(this.config);
+
+        const stream = this.provider.streamQuery(sql);
+        let closed = false;
+
+        const close = () => {
+            if (closed) {
+                return;
+            }
+
+            closed = true;
+            void this.provider.disconnect();
+        };
+
+        stream.once('close', close);
+        stream.once('error', close);
+
+        return stream;
     }
 
     public async listTables(schema?: string): Promise<QueryResult> {

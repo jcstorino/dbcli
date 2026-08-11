@@ -1,3 +1,15 @@
+# Referencia DBCLI
+
+## Caminho do projeto
+
+- `/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli`
+
+## Fonte principal
+
+- `README.md` do projeto DBCLI
+
+---
+
 # dbcli
 
 CLI para acesso a SQL Server com foco em uso por agentes de IA.
@@ -348,3 +360,4 @@ npm run build
 npm run lint
 npm run test
 ```
+

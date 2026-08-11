@@ -8,3 +8,11 @@ connections:
     password: -senha-
     encrypt: false
     trustServerCertificate: true
+  - name: ad-sample
+    provider: sqlserver
+    authentication: windows
+    server: sqlserver.exemplo.local
+    port: 1433
+    database: master
+    encrypt: true
+    trustServerCertificate: true
