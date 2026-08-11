@@ -43,11 +43,58 @@ connections:
     password: -senha-
     encrypt: false
     trustServerCertificate: true
+  - name: ad-sample
+    provider: sqlserver
+    authentication: windows
+    server: sqlserver.exemplo.local
+    port: 1433
+    database: master
+    encrypt: true
+    trustServerCertificate: true
 ```
 
 Use sempre o `name` da conexão nos comandos.
 Use `connections.local.example.yaml` como referência.
 Não versione `connections.local.yaml`.
+
+## Modos de autenticação
+
+### SQL Server
+
+Padrão:
+
+```yaml
+authentication: sql
+username: -usuario-
+password: -senha-
+```
+
+### Windows Authentication via Kerberos/Trusted Connection
+
+Use este modo quando a máquina já possui ticket Kerberos válido e runtime .NET disponível.
+
+```yaml
+authentication: windows
+```
+
+Este modo usa `Microsoft.Data.SqlClient` via helper local em .NET.
+Pré-requisitos comuns em macOS/Linux:
+
+```bash
+dotnet --version
+klist
+```
+
+Se `klist` não mostrar ticket válido, obtenha um antes de usar a conexão.
+
+### NTLM com credenciais de domínio
+
+```yaml
+authentication: ntlm
+domain: EXEMPLO
+username: usuario
+password: senha
+```
 
 ## Fluxo recomendado para agentes
 
@@ -58,6 +105,7 @@ Ao precisar trabalhar com banco:
 3. inspecionar colunas com `dbcli describe`
 4. executar consultas com `dbcli query`
 5. quando for Protheus, usar `dbcli protheus` para ler SX2/SX3
+6. para diagnosticar ambiente, usar `dbcli doctor`
 
 ## Segurança
 
@@ -100,6 +148,28 @@ dbcli test protheus
 Retorno esperado:
 
 - `ok`
+
+### Diagnóstico da conexão
+
+```bash
+dbcli doctor <connection>
+```
+
+Exemplo:
+
+```bash
+dbcli doctor oceanpact-producao
+```
+
+Checks típicos:
+
+- arquivo de configuração em uso
+- modo de autenticação
+- DNS
+- porta TCP
+- ticket Kerberos
+- runtime .NET
+- teste real de login
 
 ### Executar query inline
 

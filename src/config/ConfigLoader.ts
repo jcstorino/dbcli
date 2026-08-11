@@ -10,6 +10,10 @@ interface ConfigFile {
 }
 
 export class ConfigLoader {
+    public static resolvePath(): string {
+        return this.resolveConfigFile();
+    }
+
     public static load(connectionName: string): ConnectionConfig {
         const fileName = this.resolveConfigFile();
 

@@ -5,6 +5,7 @@ import { QueryCommand } from '../commands/QueryCommand.js';
 import { TablesCommand } from '../commands/TablesCommand.js';
 import { DescribeCommand } from '../commands/DescribeCommand.js';
 import { ProtheusMetadataCommand } from '../commands/ProtheusMetadataCommand.js';
+import { DoctorCommand } from '../commands/DoctorCommand.js';
 import { ErrorFormatter } from '../core/ErrorFormatter.js';
 import { OutputFormat } from '../core/ResultRenderer.js';
 
@@ -84,6 +85,16 @@ program
     .option('--max-rows <number>', 'Output row limit', parsePositiveInteger)
     .action(async (connection: string, table: string, options) => {
         await new ProtheusMetadataCommand().execute(connection, table, options);
+    });
+
+program
+    .command('doctor')
+    .argument('<connection>', 'Connection name')
+    .option('--format <format>', 'table|json|csv', parseFormat, 'table')
+    .option('--out <path>', 'Output file')
+    .option('--max-rows <number>', 'Output row limit', parsePositiveInteger)
+    .action(async (connection: string, options) => {
+        await new DoctorCommand().execute(connection, options);
     });
 
 program.parseAsync().catch((error: unknown) => {

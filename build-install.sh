@@ -13,6 +13,9 @@ cd "$ROOT_DIR"
 echo "npm install"
 npm install
 
+echo "dotnet restore"
+dotnet restore "$ROOT_DIR/tools/sqlclient-helper/SqlClientHelper.csproj"
+
 echo "npm run build"
 npm run build
 
