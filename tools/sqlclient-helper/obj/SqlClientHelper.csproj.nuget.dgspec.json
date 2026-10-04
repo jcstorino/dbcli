@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj": {}
+    "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj": {}
   },
   "projects": {
-    "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj": {
+    "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj",
+        "projectUniqueName": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj",
         "projectName": "SqlClientHelper",
-        "projectPath": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj",
+        "projectPath": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj",
         "packagesPath": "/Users/jcstorino/.nuget/packages/",
-        "outputPath": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli/tools/sqlclient-helper/obj/",
+        "outputPath": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/dbcli/tools/sqlclient-helper/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/jcstorino/.nuget/NuGet/NuGet.Config"
@@ -20,7 +20,7 @@
           "net10.0"
         ],
         "sources": {
-          "/opt/homebrew/Cellar/dotnet/10.0.302/libexec/library-packs": {},
+          "/opt/homebrew/Cellar/dotnet/10.0.401/libexec/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,7 +40,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/10.0.302/libexec/sdk/10.0.302/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/10.0.401/libexec/sdk/10.0.401/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

@@ -2,7 +2,7 @@
 
 ## Caminho do projeto
 
-- `/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli`
+- `/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/dbcli`
 
 ## Fonte principal
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6GZxRv9GIbU=",
+  "dgSpecHash": "ACi8dzBeXTA=",
   "success": true,
-  "projectFilePath": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/GIT/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj",
+  "projectFilePath": "/Users/jcstorino/Library/Mobile Documents/com~apple~CloudDocs/Work/DBCLI/dbcli/tools/sqlclient-helper/SqlClientHelper.csproj",
   "expectedPackageFiles": [
     "/Users/jcstorino/.nuget/packages/microsoft.bcl.cryptography/9.0.13/microsoft.bcl.cryptography.9.0.13.nupkg.sha512",
     "/Users/jcstorino/.nuget/packages/microsoft.data.sqlclient/7.0.2/microsoft.data.sqlclient.7.0.2.nupkg.sha512",
