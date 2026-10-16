@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SqlClientHelper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c14cf6bd568304d16168a455266d73fdb27c469")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8b8427bd9dd87b421244f4e6d0503e1f253da5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("SqlClientHelper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SqlClientHelper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
